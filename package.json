@@ -1,6 +1,6 @@
 {
   "name": "@xoin/xoin-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Clean JavaScript library for multi-provider LLM APIs: generation, Zod-validated structured outputs, embeddings, prompt templates, and fallback.",
   "repository": {
     "type": "git",
