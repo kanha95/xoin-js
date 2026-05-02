@@ -1,0 +1,8 @@
+template: |
+  Extract user info from the text below.
+
+  {{user_query}}
+
+  Return only JSON.
+defaults:
+  user_query: ""
