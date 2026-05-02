@@ -1,7 +1,10 @@
 # xoin
 
 <p align="center">
-  <img src="https://cdn.jsdelivr.net/npm/@xoin/xoin-js@latest/assets/XOIN_LOGO.png" alt="xoin — JavaScript LLM API client: OpenAI, Anthropic Claude, Mistral, DeepSeek, OpenAI-compatible APIs, Zod structured outputs, embeddings, RAG" width="180" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/kanha95/xoin-js/main/assets/XOIN_LOGO_RACT.png" />
+    <img src="https://raw.githubusercontent.com/kanha95/xoin-js/main/assets/XOIN_LOGO_LIGHT_BG.png" alt="xoin — JavaScript LLM API client: OpenAI, Anthropic Claude, Mistral, DeepSeek, OpenAI-compatible APIs, Zod structured outputs, embeddings, RAG" width="240" />
+  </picture>
 </p>
 
 <p align="center">
