@@ -49,6 +49,24 @@ export function createDeepSeekProvider(config: {
   });
 }
 
+export function createGeminiProvider(config: {
+  apiKey: string;
+  baseUrl?: string;
+  defaultModel?: string;
+  defaultEmbeddingModel?: string;
+  fetch?: typeof fetch;
+}): ProviderAdapter {
+  return new OpenAICompatibleProvider({
+    name: 'gemini',
+    apiKey: config.apiKey,
+    baseUrl: config.baseUrl ?? 'https://generativelanguage.googleapis.com/v1beta/openai',
+    defaultModel: config.defaultModel ?? 'gemini-2.5-flash',
+    defaultEmbeddingModel: config.defaultEmbeddingModel ?? 'text-embedding-004',
+    capabilities: { structuredOutputs: 'json-schema', embeddings: true },
+    fetch: config.fetch,
+  });
+}
+
 export function createMistralProvider(config: {
   apiKey: string;
   baseUrl?: string;

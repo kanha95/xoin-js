@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 
 import {
   createAnthropicProvider,
+  createGeminiProvider,
   createOpenAICompatibleProvider,
   createOpenAIProvider,
   createXoin,
@@ -264,6 +265,54 @@ test('supports embeddings on OpenAI-compatible providers', async () => {
     [0.1, 0.2],
     [0.3, 0.4],
   ]);
+});
+
+test('uses Gemini OpenAI-compatible defaults for chat and embeddings', async () => {
+  const calls = [];
+  const provider = createGeminiProvider({
+    apiKey: 'gemini-key',
+    fetch: async (url, init) => {
+      calls.push({ url, body: JSON.parse(init.body) });
+      if (url.endsWith('/chat/completions')) {
+        return new Response(
+          JSON.stringify({
+            model: 'gemini-2.5-flash',
+            choices: [{ message: { content: 'hello from gemini' } }],
+          }),
+          { status: 200, headers: { 'content-type': 'application/json' } },
+        );
+      }
+
+      return new Response(
+        JSON.stringify({
+          model: 'text-embedding-004',
+          data: [{ embedding: [0.01, 0.02] }],
+        }),
+        { status: 200, headers: { 'content-type': 'application/json' } },
+      );
+    },
+  });
+
+  const xoin = createXoin({
+    providers: {
+      gemini: provider,
+    },
+  });
+
+  const generated = await xoin.generate({
+    provider: 'gemini',
+    prompt: 'Say hello.',
+  });
+  const embedded = await xoin.embed({
+    provider: 'gemini',
+    input: 'hello',
+  });
+
+  assert.equal(calls[0].url, 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions');
+  assert.equal(calls[0].body.model, 'gemini-2.5-flash');
+  assert.equal(generated.model, 'gemini-2.5-flash');
+  assert.equal(embedded.model, 'text-embedding-004');
+  assert.deepEqual(embedded.embeddings, [[0.01, 0.02]]);
 });
 
 test('retries the same provider before succeeding', async () => {

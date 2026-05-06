@@ -3,12 +3,12 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/kanha95/xoin-js/main/assets/XOIN_LOGO_RACT.png" />
-    <img src="https://raw.githubusercontent.com/kanha95/xoin-js/main/assets/XOIN_LOGO_LIGHT_BG.png" alt="xoin — JavaScript LLM API client: OpenAI, Anthropic Claude, Mistral, DeepSeek, OpenAI-compatible APIs, Zod structured outputs, embeddings, RAG" width="240" />
+    <img src="https://raw.githubusercontent.com/kanha95/xoin-js/main/assets/XOIN_LOGO_LIGHT_BG.png" alt="xoin — JavaScript LLM API client: OpenAI, Anthropic Claude, Gemini, Mistral, DeepSeek, OpenAI-compatible APIs, Zod structured outputs, embeddings, RAG" width="240" />
   </picture>
 </p>
 
 <p align="center">
-  <strong>JavaScript / Node.js LLM client for OpenAI, Claude, Deepseek &amp; More</strong> — multi-provider chat completions, structured outputs, text embeddings, prompt templates, and provider fallback for production backends.
+  <strong>JavaScript / Node.js LLM client for OpenAI, Claude, Gemini, Deepseek &amp; More</strong> — multi-provider chat completions, structured outputs, text embeddings, prompt templates, and provider fallback for production backends.
 </p>
 
 <p align="center">
@@ -18,7 +18,7 @@
   <img alt="Structured Output" src="https://img.shields.io/badge/structured%20output-zod%20validated-8b5cf6">
 </p>
 
-**xoin** is an open source **LLM API client** for **JavaScript** and **TypeScript** that lets you connect to multiple AI providers—**OpenAI**, **Anthropic**, **Mistral**, **DeepSeek**, and **OpenAI-compatible** APIs—through a **single, consistent interface**.
+**xoin** is an open source **LLM API client** for **JavaScript** and **TypeScript** that lets you connect to multiple AI providers—**OpenAI**, **Anthropic**, **Gemini**, **Mistral**, **DeepSeek**, and **OpenAI-compatible** APIs—through a **single, consistent interface**.
 
 It helps you build **production-ready AI apps** with:
 
@@ -63,7 +63,7 @@ Production **Node.js** and server-side JavaScript that talks to **large language
 
 You typically want:
 
-- one **multi-provider LLM client** for OpenAI, Anthropic, Mistral, DeepSeek, and **OpenAI-compatible** backends
+- one **multi-provider LLM client** for OpenAI, Anthropic, Gemini, Mistral, DeepSeek, and **OpenAI-compatible** backends
 - **structured outputs** validated with **Zod** before your business logic runs
 - **provider fallback** when a model errors or rate-limits
 - **prompt templates** (files or inline) so you do not duplicate strings across models
@@ -158,6 +158,7 @@ Why this is useful:
 
 - OpenAI
 - Anthropic
+- Gemini
 - Mistral
 - DeepSeek
 - any OpenAI-compatible API
@@ -168,6 +169,7 @@ import dotenv from 'dotenv';
 import {
   createAnthropicProvider,
   createDeepSeekProvider,
+  createGeminiProvider,
   createMistralProvider,
   createOpenAICompatibleProvider,
   createOpenAIProvider,
@@ -187,6 +189,11 @@ const xoin = createXoin({
     anthropic: createAnthropicProvider({
       apiKey: process.env.ANTHROPIC_API_KEY,
       defaultModel: process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-20250514',
+    }),
+    gemini: createGeminiProvider({
+      apiKey: process.env.GEMINI_API_KEY,
+      defaultModel: process.env.GEMINI_MODEL || 'gemini-2.5-flash',
+      defaultEmbeddingModel: process.env.GEMINI_EMBEDDING_MODEL || 'text-embedding-004',
     }),
     mistral: createMistralProvider({
       apiKey: process.env.MISTRAL_API_KEY,
@@ -238,6 +245,7 @@ Main exports:
 - `Xoin`
 - `createOpenAIProvider`
 - `createAnthropicProvider`
+- `createGeminiProvider`
 - `createMistralProvider`
 - `createDeepSeekProvider`
 - `createOpenAICompatibleProvider`
@@ -1094,6 +1102,16 @@ Real-life use cases:
 | `defaultEmbeddingModel` | `string` | Default embedding model |
 | `fetch` | `typeof fetch` | Custom fetch implementation |
 
+### createGeminiProvider
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `apiKey` | `string` | Required Gemini API key |
+| `baseUrl` | `string` | Optional custom base URL (defaults to `https://generativelanguage.googleapis.com/v1beta/openai`) |
+| `defaultModel` | `string` | Default chat model (`gemini-2.5-flash`) |
+| `defaultEmbeddingModel` | `string` | Default embedding model (`text-embedding-004`) |
+| `fetch` | `typeof fetch` | Custom fetch implementation |
+
 ### createDeepSeekProvider
 
 | Parameter | Type | Description |
@@ -1555,6 +1573,7 @@ Included examples:
 - `anthropic-structured-output.js`
 - `mistral-structured-output.js`
 - `deepseek-structured-output.js`
+- `gemini-structured-output.js`
 - `groq-openai-compatible.js`
 - `template-file.js`
 - `generate-many.js`
@@ -1566,6 +1585,14 @@ Run one directly:
 ```bash
 npm run build
 node examples/native-js/openai-structured-output.js
+```
+
+Gemini setup in `.env`:
+
+```bash
+GEMINI_API_KEY=
+GEMINI_MODEL=gemini-2.5-flash
+GEMINI_EMBEDDING_MODEL=text-embedding-004
 ```
 
 ## Development

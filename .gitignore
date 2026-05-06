@@ -20,3 +20,8 @@ Thumbs.db
 
 coverage/
 *.tsbuildinfo
+
+# Python (xoin-py)
+xoin-py/.venv/
+xoin-py/dist/
+xoin-py/**/__pycache__/
