@@ -2,6 +2,7 @@
   "name": "@xoin/xoin-js",
   "version": "1.0.3",
   "description": "Clean JavaScript library for multi-provider LLM APIs: generation, Zod-validated structured outputs, embeddings, prompt templates, and fallback.",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/kanha95/xoin-js.git"
