@@ -29,6 +29,7 @@ Available examples:
 - `anthropic-structured-output.js`
 - `mistral-structured-output.js`
 - `deepseek-structured-output.js`
+- `gemini-structured-output.js`
 - `groq-openai-compatible.js`
 - `template-file.js`
 - `generate-many.js`
@@ -50,6 +51,10 @@ MISTRAL_MODEL=
 
 DEEPSEEK_API_KEY=
 DEEPSEEK_MODEL=
+
+GEMINI_API_KEY=
+GEMINI_MODEL=
+GEMINI_EMBEDDING_MODEL=
 
 GROQ_API_KEY=
 GROQ_BASE_URL=
